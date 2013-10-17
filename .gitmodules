@@ -1,0 +1,6 @@
+[submodule "deps/libgit2"]
+	path = deps/libgit2
+	url = https://github.com/libgit2/libgit2.git
+[submodule "/Users/hotgloupi/sandbox/cof/.config/tupcfg"]
+	path = /Users/hotgloupi/sandbox/cof/.config/tupcfg
+	url = git@github.com:hotgloupi/tupcfg.git
