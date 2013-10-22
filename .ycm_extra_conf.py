@@ -10,7 +10,7 @@ flags = [
     '-Wextra',
     '-std=c++11',
     #'-x', 'c++',
-    #'-isystem', '/Users/hotgloupi/local/lib/c++/v1',
+    '-isystem', '/Users/hotgloupi/local/lib/c++/v1',
     '-I', '/opt/local/include',
     '-I', 'src',
     '-I', 'deps/libgit2/include',
