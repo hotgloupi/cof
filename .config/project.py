@@ -29,6 +29,7 @@ class LibGit2(Dependency):
                     path.absolute(self.source_directory),
                     '-DCMAKE_C_COMPILER=%s' % self.compiler.binary,
                     '-DUSE_ICONV=ON',
+                    '-DTHREADSAFE=OFF',
                 ],
                 working_directory = self.build_path(),
             )
@@ -67,6 +68,7 @@ def configure(project, build):
 
     ## Retreive BUILD_TYPE (defaults to DEBUG)
     build_type = project.env.get('BUILD_TYPE', 'DEBUG')
+    project.env.build_set('BUILD_TYPE', build_type)
 
     ## Print a status message (Could have been verbose or debug)
     tools.status(
@@ -75,8 +77,17 @@ def configure(project, build):
     )
 
     cxx_compiler = cxx.find_compiler(
-        project, build,
+        project,
+        build,
+        include_directories = ['src'],
+        standard = 'c++11',
     )
     c_compiler = c.find_compiler(project, build)
 
     libgit2 = build.add_dependency(LibGit2(c_compiler, "deps/libgit2"))
+
+    cxx_compiler.link_executable(
+        'bin/cof',
+        ['src/cof/main.cpp', 'src/cof/test.cpp'],
+        libraries = libgit2.libraries,
+    )
